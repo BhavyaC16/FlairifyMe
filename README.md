@@ -1,0 +1,2 @@
+# FlairifyMe
+Reddit Flair Detector
