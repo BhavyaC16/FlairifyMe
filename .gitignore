@@ -2,3 +2,4 @@ __pycache__/
 RedditAPI.py
 .~lock.redditData.csv#
 .~lock.preprocessedData_withStemming.csv#
+.~lock.preprocessedData.csv#
