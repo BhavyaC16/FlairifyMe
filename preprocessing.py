@@ -19,7 +19,7 @@ def body_preprocessing(row):
 	tokens = nltk.word_tokenize(body)
 	token_words = [w for w in tokens if w.isalnum()]
 	stemmed_list = [stemming.stem(word) for word in token_words]
-	key_words = [W for W in token_words if not W in stops]
+	key_words = [W for W in stemmed_list if not W in stops]
 	joined = (" ".join(key_words))
 	return(joined)
 	
@@ -29,7 +29,7 @@ def comment_preprocessing(row):
 	tokens = nltk.word_tokenize(comments)
 	token_words = [w for w in tokens if w.isalnum()]
 	stemmed_list = [stemming.stem(word) for word in token_words]
-	key_words = [W for W in token_words if not W in stops]
+	key_words = [W for W in stemmed_list if not W in stops]
 	joined = (" ".join(key_words))
 	return(joined)
 	
