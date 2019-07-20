@@ -19,7 +19,9 @@ db = client['RedditData']
 preprocessedData = db.preprocessedData
 preprocessedData_withStemming = db.preprocessedData_withStemming
 df = pd.DataFrame(list(preprocessedData.find()))
+df = df.fillna("")
 df_withStemming = pd.DataFrame(list(preprocessedData_withStemming.find()))
+df_withStemming = df_withStemming.fillna("")
 
 x = df.title_words
 y = df.flair
@@ -30,4 +32,4 @@ nb.fit(x_train,y_train)
 
 
 y_pred = nb.predict(x_test)
-print(accuracy_score(y_pred,y_test)) 
+print(accuracy_score(y_pred,y_test))
