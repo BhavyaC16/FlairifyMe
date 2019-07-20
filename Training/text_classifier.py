@@ -1,33 +1,33 @@
-import pandas as pd
-import collections
 from pymongo import MongoClient
-from sklearn import model_selection, preprocessing, linear_model, naive_bayes, metrics, svm
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn import decomposition, ensemble
-
+import logging
+import pandas as pd
+import numpy as np
+from numpy import random
+import gensim
+import nltk
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import classification_report
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import TfidfTransformer
+import re
 
 client = MongoClient('mongodb+srv://BhavyaC16:nancydrew@flairifyme-jji1m.mongodb.net/test?retryWrites=true&w=majority')
-db = client['CSV']
-train = db.train
-test = db.test
-train = pd.DataFrame(list(train.find()))
-test = pd.DataFrame(list(test.find()))
+db = client['RedditData']
+preprocessedData = db.preprocessedData
+preprocessedData_withStemming = db.preprocessedData_withStemming
+df = pd.DataFrame(list(preprocessedData.find()))
+df_withStemming = pd.DataFrame(list(preprocessedData_withStemming.find()))
 
-train_x = train['title_words']
-train_x = train_x.as_matrix()
-train_y = train['flair']
-test_x = test['title_words']
-test_x = test_x.as_matrix()
-test_y = test['flair']
+x = df.title_words
+y = df.flair
+x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.25, random_state=10)
 
-#label encoding target variables(flairs)
-encoder = preprocessing.LabelEncoder()
-train_y = encoder.fit_transform(train_y)
-test_y = encoder.fit_transform(test_y)
-#print(collections.Counter(train_y))
-#print(collections.Counter(test_y))
+nb = Pipeline([('vect', CountVectorizer()), ('tfidf', TfidfTransformer()), ('clf', MultinomialNB())])
+nb.fit(x_train,y_train)
 
-#creating count vectorizer
-countVect = CountVectorizer(analyzer='word')
-countVect.fit(train_x)
-print(train_x)
+
+y_pred = nb.predict(x_test)
+print(accuracy_score(y_pred,y_test)) 
