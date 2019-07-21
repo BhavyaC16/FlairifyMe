@@ -5,11 +5,11 @@ import praw
 from RedditAPI import accinfo
 import pandas as pd
 import sklearn
-#nltk.download('all')
+nltk.download('punkt')
 info = accinfo()
 stops = set(stopwords.words("english"))
-c = []
-s = ''
+model = joblib.load("./Models/finalized_model.sav")
+reddit = praw.Reddit(client_id=info[0], client_secret=info[1], user_agent=info[2], username=info[3], password=info[4])
 
 def title_preprocessing(row):
 	title = row['title']
@@ -36,39 +36,33 @@ def comment_preprocessing(row):
 	joined = (" ".join(key_words))
 	return(joined)
 
-model = joblib.load("./Models/finalized_model.sav")
-post_dict = {"id": [], "title":[], "body":[], "comments": []}
+def FlairifyMe(url):
+	c = []
+	s = ''
+	post_dict = {"id": [], "title":[], "body":[], "comments": []}
 
-reddit = praw.Reddit(client_id=info[0], client_secret=info[1], user_agent=info[2], username=info[3], password=info[4])
+	submission = reddit.submission(url = url)
+	post_dict['id']=submission.id
+	post_dict['title']=submission.title
+	post_dict['body']=submission.selftext
+	submission.comments.replace_more(limit=0)
+	for comment in submission.comments.list():
+		c.append(comment.body)
+	post_dict['comments'].append(c)
 
-print("enter url:")
-url = input()
-submission = reddit.submission(url = url)
-post_dict['id']=submission.id
-post_dict['title']=submission.title
-post_dict['body']=submission.selftext
-submission.comments.replace_more(limit=0)
-for comment in submission.comments.list():
-	c.append(comment.body)
-post_dict['comments'].append(c)
+	data = pd.DataFrame(post_dict)
+	data.fillna("")
 
-data = pd.DataFrame(post_dict)
-data.fillna("")
+	data['title'] = data['title'].str.lower()
+	data['body'] = data['body'].str.lower()
+	for a in data['comments'][0]:
+		s+=str(a)+" "
+	data['comments']=s
 
-data['title'] = data['title'].str.lower()
-data['body'] = data['body'].str.lower()
-for a in data['comments'][0]:
-	s+=str(a)+" "
-data['comments']=s
+	data['title_words'] = data.apply(title_preprocessing,axis=1)
+	data['body_words'] = data.apply(body_preprocessing,axis=1)
+	data['comment_words'] = data.apply(comment_preprocessing,axis=1)
 
-
-data['title_words'] = data.apply(title_preprocessing,axis=1)
-#print(data['title_words'])
-data['body_words'] = data.apply(body_preprocessing,axis=1)
-#print(data['body_words'])
-data['comment_words'] = data.apply(comment_preprocessing,axis=1)
-#print(data['comment_words'])
-
-combine = data['title_words']+data['body_words']+data['comment_words']
-data = data.assign(combined=combine)
-print(model.predict(data['combined']))
+	combine = data['title_words']+data['body_words']+data['comment_words']
+	data = data.assign(combined=combine)
+	return(model.predict(data['combined'])[0])
