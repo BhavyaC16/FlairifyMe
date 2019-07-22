@@ -14,6 +14,9 @@ def flairDetect():
 	flair = str(FlairifyMe(str(redditURL)))
 	print(flair)
 	return render_template('home.html',flair=flair)
+@app.route('/postAnalysis')
+def postAnalysis():
+	return render_template('analysis.html')
 if __name__ == '__main__':
     app.run()
 
