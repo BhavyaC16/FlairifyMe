@@ -63,6 +63,13 @@ The data has been preprocessed using the NLTK library. The following procedures 
 Two separate databases have been prepared and saved as a MongoDB instance for training: one with stemming, and the other without stemming, as it is said to reduce prediction accuracy in certain cases by sources.
 
 ### Training 
+The data has been loaded from MongoDB to a pandas DataFrame and split into 80-20 Training-Testing sets using scikit-learn.
+Each of the post features: Title, Body, Comments, Title+Comments and Title+Body+Comments were trained on three algorithms: Naive Bayes, Linear SVM and Logistic Regression, for both datasets(with and without stemming).
+
+Following are the results, summarized as a table:
+
+
+After going through the flair-wise and overall prediction accuracies, the model trained using Title+Body+Comments on non-Stemmed data, using Logistic Regresssion was chosen. 
 
 ### Flair Prediction
 The saved model is loaded for predicting the flair once the post features (title, body and comments) have been cleaned using NLTK. The returned result is displayed on the web-application.
@@ -79,7 +86,9 @@ This task has been a great learning experience for me as it was my first time wo
 ## References
 1. [Scraping Reddit](https://www.datasciencecentral.com/profiles/blogs/scraping-reddit)
 2. [Pre-processing Data](https://pythonhealthcare.org/2018/12/14/101-pre-processing-data-tokenization-stemming-and-removal-of-stop-words/)
-3. [Text-Classification](https://medium.com/@ageitgey/text-classification-is-your-new-secret-weapon-7ca4fad15788)
-4. [Bag of Words in NLP](https://medium.com/greyatom/an-introduction-to-bag-of-words-in-nlp-ac967d43b428)
-5. [Choosing a Text-Classifier](https://nlp.stanford.edu/IR-book/html/htmledition/choosing-what-kind-of-classifier-to-use-1.html)
-6. [Text-Classification using Scikit-learn](https://towardsdatascience.com/multi-class-text-classification-model-comparison-and-selection-5eb066197568)
+3. [Training Machine Learning Models with MongoDB](https://www.mongodb.com/blog/post/training-machine-learning-models-with-mongodb)
+4. [Text-Classification](https://medium.com/@ageitgey/text-classification-is-your-new-secret-weapon-7ca4fad15788)
+5. [Bag of Words in NLP](https://medium.com/greyatom/an-introduction-to-bag-of-words-in-nlp-ac967d43b428)
+6. [Choosing a Text-Classifier](https://nlp.stanford.edu/IR-book/html/htmledition/choosing-what-kind-of-classifier-to-use-1.html)
+7. [Text-Classification using Scikit-learn](https://towardsdatascience.com/multi-class-text-classification-model-comparison-and-selection-5eb066197568)
+8. [Deploying Flask app to Heroku](https://github.com/datademofun/heroku-basic-flask)
