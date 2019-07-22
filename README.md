@@ -77,4 +77,9 @@ I plan on adding the following features to the project:
 This task has been a great learning experience for me as it was my first time working with Machine Learning and Natural Language Processing, and with most of the tools like Heroku and MongoDB, as well as several libraries like scikit-learn, nltk, praw and Flask.
 
 ## References
-1. 
+1. [Scraping Reddit](https://www.datasciencecentral.com/profiles/blogs/scraping-reddit)
+2. [Pre-processing Data](https://pythonhealthcare.org/2018/12/14/101-pre-processing-data-tokenization-stemming-and-removal-of-stop-words/)
+3. [Text-Classification](https://medium.com/@ageitgey/text-classification-is-your-new-secret-weapon-7ca4fad15788)
+4. [Bag of Words in NLP](https://medium.com/greyatom/an-introduction-to-bag-of-words-in-nlp-ac967d43b428)
+5. [Choosing a Text-Classifier](https://nlp.stanford.edu/IR-book/html/htmledition/choosing-what-kind-of-classifier-to-use-1.html)
+6. [Text-Classification using Scikit-learn](https://towardsdatascience.com/multi-class-text-classification-model-comparison-and-selection-5eb066197568)
