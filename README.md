@@ -52,7 +52,7 @@ python3 app.py
 ## Approach 
 ### Data Scraping
 The python library PRAW has been used to scrape data from the subreddit r/india, with a total of 3,156 posts for 13 different flairs. The number of posts scraped per flair are as follows:
-[DataSplit](https://github.com/BhavyaC16/FlairifyMe/blob/master/Data/Scripts/DataSplit.png)
+![alt text](https://github.com/BhavyaC16/FlairifyMe/blob/master/Data/Scripts/DataSplit.png)
 
 ### Data preprocessing
 The data has been preprocessed using the NLTK library. The following procedures have been executed on the title, body and comments to clean the data:
@@ -64,8 +64,17 @@ Two separate databases have been prepared and saved as a MongoDB instance for tr
 
 ### Training 
 
+### Flair Prediction
+The saved model is loaded for predicting the flair once the post features (title, body and comments) have been cleaned using NLTK. The returned result is displayed on the web-application.
 
+## Future Extension
+I plan on adding the following features to the project:
+1. Improving the prediction by training the model on user inputs.
+2. Creating a developer API to use FlairifyMe
+3. Automating the script to allow users to develop prediction model for any subreddit entered by them.
 
+## Learnings
+This task has been a great learning experience for me as it was my first time working with Machine Learning and Natural Language Processing, and with most of the tools like Heroku and MongoDB, as well as several libraries like scikit-learn, nltk, praw and Flask.
 
-
-
+## References
+1. 
