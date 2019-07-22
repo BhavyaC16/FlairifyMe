@@ -68,6 +68,7 @@ Each of the post features: Title, Body, Comments, Title+Comments and Title+Body+
 
 Following are the results, summarized as a table:
 
+![alt text](https://github.com/BhavyaC16/FlairifyMe/blob/master/Training/AccuracyStats.png)
 
 After going through the flair-wise and overall prediction accuracies, the model trained using Title+Body+Comments on non-Stemmed data, using Logistic Regresssion was chosen. 
 
