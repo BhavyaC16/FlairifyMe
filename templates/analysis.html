@@ -1,0 +1,157 @@
+<html>
+  <head>
+    <title>FlairifyMe</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <style>
+    body{
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+    h1 { 
+      display: block;
+      font-size: 4.5em;
+      margin-top: 0.67em;
+      margin-bottom: 0.67em;
+      margin-left: 0;
+      margin-right: 0;
+      font-family: 'arial';
+      color: #FFFFFF;
+    }
+    h2 { 
+      display: block;
+      font-size: 2em;
+      margin-top: 0.67em;
+      margin-bottom: 0.67em;
+      margin-left: 0;
+      margin-right: 0;
+      font-family: 'arial';
+      color: #FFFFFF;
+    }
+    h4 a{ 
+      display: block;
+      margin-top: 0.67em;
+      margin-bottom: 0.67em;
+      margin-left: 0;
+      margin-right: 0;
+      font-family: 'arial';
+      color: #FFFFFF;
+    }
+    .navbar{
+      background-color: #FF7171;
+      top: 0;
+      width: 100%;
+      min-height: 200px;
+    }
+  
+    .footer{
+        width: 100%;
+        position: fixed;        
+        background: #808080;
+        padding: 10px 0;
+        color: #fff;
+        bottom: 0;
+      }
+      .footer a {
+        float: right;
+        color: #FFFFFF;
+        text-align: center;
+        padding: 2px 40px;
+        text-decoration: none;
+        }
+      
+  </style>
+  </head>
+  <body>
+    <body>
+    <div class='navbar'>
+      <div class='container'>
+        <h4 align='right'><a href="https://flairify-me.herokuapp.com/">Home</a></h4>
+
+      <h1 align='center'>FlairifyMe</h1>
+      <p>
+      <h2 align='center'>Reddit Flair Detector</h2>
+      </div>
+    </div>
+    <div class='container'>
+      <h3>Flair Analysis based on Comments</h3>
+      <br>
+    <canvas id='postCommentAnalysis' width='100' height='50'></canvas>
+    <br>
+    <br>
+    <h3>Flair Analysis based on Upvotes</h3>
+    <br>
+    <canvas id='postUpvotesAnalysis' width="100" height="50"></canvas>
+    <br>
+    <br>
+    <h3>Temporal Analysis of Posts</h3>
+    <canvas id='temporalAnalysis' width="100" height="50"></canvas>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div class="footer">
+          <div class="container">Developed by: Bhavya Chopra
+          <a href="https://github.com/BhavyaC16/FlairifyMe" align="right">View Project on GitHub</a>
+          </div>        
+      </div>
+<script>
+    var chart1 = document.getElementById('postCommentAnalysis').getContext('2d');
+    var chart2 = document.getElementById('postUpvotesAnalysis').getContext('2d');
+    var chart3 = document.getElementById('temporalAnalysis').getContext('2d');
+
+    var pieChart1 = new Chart(postCommentAnalysis,{
+      type:'pie',
+      data:{
+        labels:['AMA','Business/Finance','Food','Sports','Politics','Science/Technology','Policy/Economy','Photography','Scheduled','[R]eddiquette','Non-Political','AskIndia','Entertainment'],
+        datasets:[
+        {
+          label: 'Comments',
+          data:[47143, 6087, 9685, 4882, 19392, 6456, 9634, 6583, 37837, 44116, 27047, 14393, 19278],
+          backgroundColor: ['#117A65','#BB8FCE','#85C1E9','#45B39D','#52BE80','#48C9B0','#F4D03F','#F5B041','#CACFD2','#99A3A4','#17A589','#D98880','#DC7633']
+        }
+       ]
+       }, 
+      options:{}
+    });
+
+    var pieChart2 = new Chart(postUpvotesAnalysis,{
+      type:'pie',
+      data:{
+        labels:['AMA','Business/Finance','Food','Sports','Politics','Science/Technology','Policy/Economy','Photography','Scheduled','[R]eddiquette','Non-Political','AskIndia','Entertainment'],
+        datasets:[
+        {
+          label: 'Comments',
+          data:[39599, 28396, 45764, 60574, 80213, 34836, 34412, 90563, 4910, 60271, 189160, 18984, 48851],
+          backgroundColor: ['#117A65','#BB8FCE','#85C1E9','#45B39D','#52BE80','#48C9B0','#F4D03F','#F5B041','#CACFD2','#99A3A4','#17A589','#D98880','#DC7633']
+        }
+        ]
+      },
+      options:{}
+    });
+
+    var lineChart = new Chart(temporalAnalysis,{
+      type:'line',
+      data:{
+        labels:['12AM','1AM','2AM','3AM','4AM','5AM','6AM','7AM','8AM','9AM','10AM','11AM','12PM','1PM','2PM','3PM','4PM','5PM','6PM','7PM','8PM','9PM','10PM','11PM'],
+        datasets:[
+        {
+          label: 'Number of posts on r/India',
+          data:[144, 197, 194, 174, 175, 218, 128, 92, 82, 45, 28, 25, 28, 22, 31, 74, 110, 247, 225, 225, 198, 201, 149, 144],
+          backgroundColor:'#99A3A4'
+        }
+        ]
+      },
+      options:{}
+    });
+
+
+
+
+    
+
+</script>       
+</body>
+</html>
+
