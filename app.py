@@ -1,5 +1,6 @@
-from flask import Flask, render_template,request,jsonify
+from flask import Flask, render_template,request, make_response
 from flair_predictor import FlairifyMe
+import json
 import os
 port = int(os.environ.get("PORT",5000))
 
@@ -24,8 +25,13 @@ def apiFlairDetect():
 	redditURL = redditURL[redditURL.find(",")+3:-4]
 	print(redditURL)
 	flair = str(FlairifyMe(redditURL))
-	flairPrediction = {"flair":flair}
-	return jsonify(flairPrediction)
-
+	flairPrediction = {'status': 'successful', 'flair':flair}
+	return json.dumps(flairPrediction), 201
+@app.errorhandler(404)
+def not_found(error):
+	return make_response(json.dumps({'status': 'failed', 'error': '404: Page not found'}),404)
+@app.errorhandler(500)
+def internal_server_error(error):
+	return make_response(json.dumps({'status': 'failed', 'error': '500: Incorrect request format'}),500)
 if __name__ == '__main__':
     app.run()
