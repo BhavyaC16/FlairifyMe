@@ -75,11 +75,26 @@ After going through the flair-wise and overall prediction accuracies, the model 
 ### Flair Prediction
 The saved model is loaded for predicting the flair once the post features (title, body and comments) have been cleaned using NLTK. The returned result is displayed on the web-application.
 
+### API for querying FlairifyMe
+A developer API using flask has been implemented, which returns a JSON containing the predicted flair of the Reddit Post queried by the user.
+
+Can be accessed by querying: 
+```
+flairify-me.herokuapp.com/api/resource?redditURL=<enter_url_here>
+```
+
+Returns JSON of the following format when successful:
+```
+{'status': 'successful', 'status_code': 200, 'result': {'flair': '<predicted_flair>'}}
+```
+Else, returns JSON of the format: 
+```
+{'status': 'failed', 'status_code': <error_code>, 'result': {'error': '<error_message>'}}
+```
 ## Future Extension
 I plan on adding the following features to the project:
 1. Improving the prediction by training the model on user inputs.
-2. Creating a developer API to use FlairifyMe
-3. Automating the script to allow users to develop prediction model for any subreddit entered by them.
+2. Automating the script to allow users to develop prediction model for any subreddit entered by them.
 
 ## Learnings
 This task has been a great learning experience for me as it was my first time working with Machine Learning and Natural Language Processing, and with most of the tools like Heroku and MongoDB, as well as several libraries like scikit-learn, nltk, praw and Flask.

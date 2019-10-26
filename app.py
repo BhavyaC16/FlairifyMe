@@ -25,13 +25,13 @@ def apiFlairDetect():
 	redditURL = redditURL[redditURL.find(",")+3:-4]
 	print(redditURL)
 	flair = str(FlairifyMe(redditURL))
-	flairPrediction = {'status': 'successful', 'flair':flair}
-	return json.dumps(flairPrediction), 201
+	flairPrediction = {'status': 'successful', 'status_code': 200, 'result':{'flair':flair}}
+	return json.dumps(flairPrediction)
 @app.errorhandler(404)
 def not_found(error):
-	return make_response(json.dumps({'status': 'failed', 'error': '404: Page not found'}),404)
+	return make_response(json.dumps({'status': 'failed', 'status_code': 404, 'result': {'error': 'Not found'}}))
 @app.errorhandler(500)
 def internal_server_error(error):
-	return make_response(json.dumps({'status': 'failed', 'error': '500: Incorrect request format'}),500)
+	return make_response(json.dumps({'status': 'failed', 'status_code': 500, 'error': '500: Incorrect request format'}),500)
 if __name__ == '__main__':
     app.run()
