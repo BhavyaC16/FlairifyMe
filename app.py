@@ -1,5 +1,5 @@
 from flask import Flask, render_template,request, make_response
-from flair_predictor import FlairifyMe
+from flair_predictor import FlairifyMe, FlairDetect
 import json
 import os
 port = int(os.environ.get("PORT",5000))
@@ -12,9 +12,10 @@ def home():
 def flairDetect():
 	redditURL = request.form['redditpost']
 	print(redditURL)
-	flair = str(FlairifyMe(str(redditURL)))
-	print(flair)
-	return render_template('home.html',flair=flair)
+	predicted_flair = str(FlairifyMe(str(redditURL)))
+	actual_flair = str(FlairDetect(str(redditURL)))
+	print(predicted_flair, actual_flair)
+	return render_template('home.html', predicted_flair = predicted_flair, actual_flair = actual_flair)
 @app.route('/postAnalysis')
 def postAnalysis():
 	return render_template('analysis.html')

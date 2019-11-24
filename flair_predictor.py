@@ -66,3 +66,8 @@ def FlairifyMe(url):
 	combine = data['title_words']+data['body_words']+data['comment_words']
 	data = data.assign(combined=combine)
 	return(model.predict(data['combined'])[0])
+	
+def FlairDetect(url):
+	submission = reddit.submission(url = url)
+	actual_flair = submission.link_flair_css_class
+	return(actual_flair)
