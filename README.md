@@ -68,7 +68,25 @@ Each of the post features: Title, Body, Comments, Title+Comments and Title+Body+
 
 Following are the results, summarized as a table:
 
-![alt text](https://github.com/BhavyaC16/FlairifyMe/blob/master/Training/AccuracyStats.png)
+DATA WITHOUT STEMMING:
+
+| **Feature\Algorithm**   | **Naive Bayes** | **Linear SVM** | **Logistic Regression** |
+|-------------------------|-----------------|----------------|-------------------------|
+| **Title**               | 0.59177         | 0.58386        | 0.54430                 |
+| **Body**                | 0.20569         | 0.24367        | 0.24051                 |
+| **Comments**            | 0.31171         | 0.59494        | 0.58069                 |
+| **Title+Comments**      | 0.37500         | 0.64082        | 0.63449                 |
+| **Title+Body+Comments** | 0.37816         | 0.64399        | **0.65189**             |
+
+DATA WITH STEMMING:
+
+| **Feature\Algorithm**   | **Naive Bayes** | **Linear SVM** | **Logistic Regression** |
+|-------------------------|-----------------|----------------|-------------------------|
+| **Title**               | 0.57753         | 0.57120        | 0.54430                 |
+| **Body**                | 0.18354         | 0.23101        | 0.24051                 |
+| **Comments**            | 0.30063         | 0.55538        | 0.56013                 |
+| **Title+Comments**      | 0.36076         | 0.58703        | 0.60126                 |
+| **Title+Body+Comments** | 0.36551         | 0.59335        | 0.61392                 |
 
 After going through the flair-wise and overall prediction accuracies, the model trained using Title+Body+Comments on non-Stemmed data, using Logistic Regresssion was chosen. 
 
