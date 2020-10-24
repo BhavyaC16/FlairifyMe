@@ -44,7 +44,20 @@ cd FlairifyMe/
 ```
 pip3 install -r requirements.txt
 ```
-4. To run the server, execute the following command
+4. Create the file `RedditAPI.py` as follows:
+```python
+def accinfo():
+	personalScript = '<enter_Reddit_App_personal_script_here>'
+	secretKey = '<enter_Reddit_App_secret_key_here>'
+	app = 'FlairifyMe'
+	username = '<enter_your_Reddit_Username_here>'
+	password = '<enter_your_Reddit_password>'
+	return([personalScript,secretKey,app,username,password])
+
+```
+Copy the same file to the directory: `./Data/Scripts/` as well if you want to scrape posts from Reddit.
+
+5. To run the server, execute the following command
 ```
 python3 app.py
 ```
